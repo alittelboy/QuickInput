@@ -1,0 +1,9 @@
+D:\bc\c#\QuickInput\QuickInput\bin\Release\QuickInput.exe.config
+D:\bc\c#\QuickInput\QuickInput\bin\Release\QuickInput.exe
+D:\bc\c#\QuickInput\QuickInput\bin\Release\QuickInput.pdb
+D:\bc\c#\QuickInput\QuickInput\obj\Release\QuickInput.Form1.resources
+D:\bc\c#\QuickInput\QuickInput\obj\Release\QuickInput.Properties.Resources.resources
+D:\bc\c#\QuickInput\QuickInput\obj\Release\QuickInput.csproj.GenerateResource.cache
+D:\bc\c#\QuickInput\QuickInput\obj\Release\QuickInput.csproj.CoreCompileInputs.cache
+D:\bc\c#\QuickInput\QuickInput\obj\Release\QuickInput.exe
+D:\bc\c#\QuickInput\QuickInput\obj\Release\QuickInput.pdb
