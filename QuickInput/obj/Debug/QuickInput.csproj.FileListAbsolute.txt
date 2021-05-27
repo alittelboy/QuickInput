@@ -8,3 +8,5 @@ D:\bc\c#\QuickInput\QuickInput\obj\Debug\QuickInput.csproj.CoreCompileInputs.cac
 D:\bc\c#\QuickInput\QuickInput\obj\Debug\QuickInput.exe
 D:\bc\c#\QuickInput\QuickInput\obj\Debug\QuickInput.pdb
 D:\bc\c#\QuickInput\QuickInput\obj\Debug\QuickInput.Form1.resources
+D:\bc\c#\QuickInput\QuickInput\obj\Debug\Interop.IWshRuntimeLibrary.dll
+D:\bc\c#\QuickInput\QuickInput\obj\Debug\QuickInput.csproj.ResolveComReference.cache
