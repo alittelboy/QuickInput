@@ -31,6 +31,9 @@ namespace QuickInput
         private string splitChar = "";
         private string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\QuickInputSet.ini";
         private bool testMode = false;
+        string initial_title = "";
+
+        int[] press_test = new int[255]; 
         void timer_Tick()
         {
 
@@ -52,11 +55,11 @@ namespace QuickInput
 
 
             // output快捷键 空格32+编队
-            if (keys[32])
+            if (keys[32] && keys_before[32])
             {
                 for (int i = 0; i < 255; i++)
                 {
-                    if (!keys[i] && keys_before[i])
+                    if (keys[i] && !keys_before[i])
                     {
                         SendKeys.SendWait("{BKSP}");
                         SendKeys.SendWait("{BKSP}");
@@ -66,11 +69,11 @@ namespace QuickInput
                 }
             }
             //ctrl 17 编队，只能0-9，48-57
-            if(keys[17] && !keys[16])
+            if(keys[17] && keys_before[17] && !keys[16])
             {
                 for (int i = 48; i < 58; i++)
                 {
-                    if (!keys[i] && keys_before[i])
+                    if (keys[i] && !keys_before[i])
                     {
                         SendKeys.SendWait("^c");
                         setValue(i, Clipboard.GetText());
@@ -81,11 +84,11 @@ namespace QuickInput
             }
 
             //ctrl 17 + shift 16 add 编队，只能0-9
-            if (keys[17] && keys[16])
+            if (keys[17] && keys_before[17] && keys[16] && keys_before[16])
             {
                 for (int i = 48; i < 58; i++)
                 {
-                    if (!keys[i] && keys_before[i])
+                    if (keys[i] && !keys_before[i])
                     {
                         string tmp = values[i];
                         SendKeys.SendWait("^c");
@@ -106,7 +109,8 @@ namespace QuickInput
             for (int i = 0; i < 255; i++)
             {
                 keys_before[i] = keys[i];
-                keys[i] = GetAsyncKeyState(i) != 0;
+                press_test[i] = GetAsyncKeyState(i);
+                keys[i] = press_test[i] != 0;
             }
         }
 
@@ -124,6 +128,8 @@ namespace QuickInput
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.ReadOnly = true;
             this.textBox2.Text = iniPath;
+
+            initial_title = this.Text;
 
             if (testMode)
             {
@@ -185,16 +191,68 @@ namespace QuickInput
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             testMode = checkBox1.Checked;
+            if (testMode)
+            {
+                this.textBox1.BackColor = System.Drawing.SystemColors.Window;
+                this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+                this.textBox1.ReadOnly = false;
+
+                this.textBox2.BackColor = System.Drawing.SystemColors.Window;
+                this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+                this.textBox2.ReadOnly = false;
+            }
+            else
+            {
+                this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+                this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                this.textBox1.ReadOnly = true;
+
+                this.textBox2.BackColor = System.Drawing.SystemColors.Control;
+                this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                this.textBox2.ReadOnly = true;
+
+                this.Text = initial_title;
+            }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", iniPath);   //直接打开文件Readme.txt
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            string target = "https://github.com/alittelboy/QuickInput";
+            //Use no more than one assignment when you test this code. 
+            //string target = "ftp://ftp.microsoft.com"; 
+            //string target = "C:\\Program Files\\Microsoft Visual Studio\\INSTALL.HTM"; 
 
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch
+                (
+                 System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            iniPath = textBox2.Text;
         }
     }
     class IniManager
