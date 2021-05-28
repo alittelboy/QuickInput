@@ -5,6 +5,7 @@ using IWshRuntimeLibrary;
 using System.Diagnostics;
 using System.IO;
 using File = System.IO.File;
+using System.Text.RegularExpressions;
 
 namespace QuickInput
 {
@@ -69,7 +70,7 @@ namespace QuickInput
                         {
                             SendKeys.SendWait("{BKSP}");
                             SendKeys.SendWait("{BKSP}");
-                            SendKeys.SendWait(values[i]);
+                            SendOutByI(i);
                             return;
                         }
 
@@ -110,6 +111,39 @@ namespace QuickInput
             }
 
 
+        }
+
+        private void SendOutByI(int i)
+        {
+            
+            string tmp = values[i];
+
+            if (tmp.IndexOf("QuickInputRun:")==0)
+            {
+                string com = tmp.Substring("QuickInputRun:".Length);
+                WshShell shell = new WshShell();
+                shell.Run(com);
+                return;
+            }
+            if (Directory.Exists(tmp))
+            {
+                ExplorePath(tmp);
+            }
+            else if (File.Exists(tmp))
+            {
+                WshShell shell = new WshShell();
+                shell.Run(tmp);
+                return;
+            }
+            else if (IsUrl(tmp))
+            {
+                openAppWeb(tmp);
+            }
+            else
+            {
+                SendKeys.SendWait(tmp);
+            }
+            
         }
 
         private void GetPressedKey()
@@ -211,8 +245,9 @@ namespace QuickInput
             Console.WriteLine("Set " + index + ": " + val);
             //做一些反转义的处理
             values[index] = val.Replace("\r\n", "{ENTER}");
+            values[index] = val.Replace("\n\r", "{ENTER}");
             values[index] = val.Replace("\n", "{ENTER}");
-
+            values[index] = val.Replace("\r", "{ENTER}");
             if (needsave)
             {
                 save();
@@ -625,7 +660,37 @@ namespace QuickInput
 
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("developing!","sorry");
+        }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            WshShell shell = new WshShell();
+            shell.Run("cmd");
+        }
+
+        /// <summary>
+        /// 判断一个字符串是否为url
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsUrl(string str)
+        {
+            try
+            {
+                string Url = @"^http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?$";
+                return Regex.IsMatch(str, Url);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private void 高级功能使用ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string tmp = "特殊字符\n功能键和一些特殊字符需要输入转义版本，例如{ENTER}表示换行。更多转义你可以点击关于->转义查询。\n\n打开文件\n将编队设置为文件地址，调用编队即可打开文件。例如：65=D:\\myfile.txt\n\n打开文件夹\n将编队设置为文件夹地址，调用编队即可打开文件夹。例如：65=D:\\\n\n打开网页\n将编队设置为完整的网页地址（http或https），调用编队即可打开网页。例如：65=https://www.baidu.com/\n\n运行指令\n将编队设置为开头“QuickInputRun:”，调用编队即可执行指令。例如：65=QuickInputRun:cmd";
+            MessageBox.Show(tmp, "高级功能使用");
         }
     }
 

@@ -73,12 +73,13 @@ namespace QuickInput
         {
             if (!System.IO.File.Exists(filePath))
             {
-                System.IO.File.Create(filePath).Dispose();//创建INI文件，并释放                              
+                System.IO.File.Create(filePath).Dispose();//创建INI文件，并释放    
+                writeWordsHelp(filePath);
             }
             WriteHelp(filePath);
         }
 
-        public static void WriteHelp(string filePath)
+        private static void writeWordsHelp(string filePath)
         {
             if (Read("words", "65", "", filePath).Equals(""))
             {
@@ -88,8 +89,29 @@ namespace QuickInput
             {
                 WritePrivateProfileString("words", "66", "空格 加 b以输入这行数据，需要关闭中文输入法。{ENTER}表示换行，{+}、{^}、{%}等符号有特殊含义，可以看底部链接说明。", filePath);
             }
-            WritePrivateProfileString("ReadMe", "KeyCode", "You can get value-key relation in this link. https://www.bejson.com/othertools/keycodes/", filePath);
-            WritePrivateProfileString("ReadMe", "SendKeys", "You can set special words by this way. https://www.cnblogs.com/shaozhuyong/p/5951779.html", filePath);
+        }
+
+
+        public static void WriteHelp(string filePath)
+        {
+            if (Read("words", "65", "", filePath).Equals(""))
+            {
+                WritePrivateProfileString("words", "65", "", filePath);
+            }
+            if (Read("words", "66", "", filePath).Equals(""))
+            {
+                WritePrivateProfileString("words", "66", "", filePath);
+            }
+
+            WritePrivateProfileString("使用说明", "设置编队", "你可以在这个文件里设置编队，请设置在[words]章节里，格式：按键码=编队内容。", filePath);
+            WritePrivateProfileString("使用说明", "特殊字符", "功能键和一些特殊字符需要输入转义版本，例如{ENTER}表示换行。更多转义你可以查看下面的链接。", filePath);
+           
+            WritePrivateProfileString("使用说明", "打开文件", "将编队设置为文件地址，调用编队即可打开文件。例如：65=D:\\myfile.txt", filePath);
+            WritePrivateProfileString("使用说明", "打开文件夹", "将编队设置为文件夹地址，调用编队即可打开文件夹。例如：65=D:\\", filePath);
+            WritePrivateProfileString("使用说明", "打开网页", "将编队设置为完整的网页地址（http或https），调用编队即可打开网页。例如：65=https://www.baidu.com/", filePath);
+            WritePrivateProfileString("使用说明", "运行指令", "将编队设置为开头“QuickInputRun:”，调用编队即可执行指令。例如：65=QuickInputRun:cmd", filePath);
+            WritePrivateProfileString("使用说明", "KeyCode", "你可以在这个链接里查看按键码， https://www.bejson.com/othertools/keycodes/", filePath);
+            WritePrivateProfileString("使用说明", "SendKeys", "你可以在这个链接查看转义字符， https://www.cnblogs.com/shaozhuyong/p/5951779.html", filePath);
         }
         /// <summary>
         /// 删除节

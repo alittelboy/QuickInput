@@ -54,6 +54,7 @@
             this.测试模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.高级功能使用ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.网站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.按键码查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.转移查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -222,6 +223,7 @@
             // 
             this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.帮助ToolStripMenuItem,
+            this.高级功能使用ToolStripMenuItem,
             this.网站ToolStripMenuItem,
             this.按键码查询ToolStripMenuItem,
             this.转移查询ToolStripMenuItem,
@@ -234,6 +236,12 @@
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             resources.ApplyResources(this.帮助ToolStripMenuItem, "帮助ToolStripMenuItem");
             this.帮助ToolStripMenuItem.Click += new System.EventHandler(this.帮助ToolStripMenuItem_Click);
+            // 
+            // 高级功能使用ToolStripMenuItem
+            // 
+            this.高级功能使用ToolStripMenuItem.Name = "高级功能使用ToolStripMenuItem";
+            resources.ApplyResources(this.高级功能使用ToolStripMenuItem, "高级功能使用ToolStripMenuItem");
+            this.高级功能使用ToolStripMenuItem.Click += new System.EventHandler(this.高级功能使用ToolStripMenuItem_Click);
             // 
             // 网站ToolStripMenuItem
             // 
@@ -349,6 +357,7 @@
         private System.Windows.Forms.ToolStripMenuItem 打开设置文件目录ToolStripMenuItem;
         private RevitDevelopment.CustomControls.PlaceHolderTextBox placeHolderTextBox2;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 高级功能使用ToolStripMenuItem;
     }
 }
 
