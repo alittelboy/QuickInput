@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace QuickInput
 {
+
     class IniManager
     {
         /// <summary>
@@ -32,9 +30,22 @@ namespace QuickInput
         /// <returns>非零表示成功，零表示失败</returns>
         [DllImport("kernel32")]
         private static extern int WritePrivateProfileString(string lpApplicationName, string lpKeyName, string lpString, string lpFileName);
+        public static int valuesNum = 255;
+        public static Form1 form1 = null;
+        public static string iniPath = "";
+        //public static string[] values = new string[valuesNum];
+        public static Dictionary<int, string> valuesDic = new Dictionary<int, string>();
 
-
-
+        /// <summary>
+        /// 初始化，绑定
+        /// </summary>
+        /// <param name="f"></param>
+        public static void init(Form1 f)
+        {
+            form1 = f;
+            //f.iniPath应在此处更新
+            iniPath = f.iniPath;
+        }
         /// <summary>
         /// 读取INI文件值
         /// </summary>
@@ -43,17 +54,22 @@ namespace QuickInput
         /// <param name="def">未取到值时返回的默认值</param>
         /// <param name="filePath">INI文件完整路径</param>
         /// <returns>读取的值</returns>
-        public static string Read(string section, string key, string def, string filePath, bool check = false)
+        public static string Read(string section, string key, string def, string filePath = "", bool check = false)
         {
+            if (filePath.Equals(""))
+            {
+                filePath = iniPath;
+            }
             if (check)
             {
                 CheckPath(filePath);
             }
 
-            StringBuilder sb = new StringBuilder(1024);
-            GetPrivateProfileString(section, key, def, sb, 1024, filePath);
+            StringBuilder sb = new StringBuilder(100);
+            GetPrivateProfileString(section, key, def, sb, 100, filePath);
             return sb.ToString();
         }
+
 
         /// <summary>
         /// 写INI文件值
@@ -63,14 +79,23 @@ namespace QuickInput
         /// <param name="value">要写入的新字符串</param>
         /// <param name="filePath">INI文件完整路径</param>
         /// <returns>非零表示成功，零表示失败</returns>
-        public static int Write(string section, string key, string value, string filePath)
+        public static int Write(string section, string key, string value, string filePath = "")
         {
+            if (filePath.Equals(""))
+            {
+                filePath = iniPath;
+            }
             CheckPath(filePath);
             return WritePrivateProfileString(section, key, value, filePath);
         }
 
-        private static void CheckPath(string filePath)
+        public static void CheckPath(string filePath = "")
         {
+            if (filePath.Equals(""))
+            {
+                filePath = iniPath;
+            }
+
             if (!System.IO.File.Exists(filePath))
             {
                 System.IO.File.Create(filePath).Dispose();//创建INI文件，并释放    
@@ -79,8 +104,12 @@ namespace QuickInput
             WriteHelp(filePath);
         }
 
-        private static void writeWordsHelp(string filePath)
+        private static void writeWordsHelp(string filePath = "")
         {
+            if (filePath.Equals(""))
+            {
+                filePath = iniPath;
+            }
             if (Read("words", "65", "", filePath).Equals(""))
             {
                 WritePrivateProfileString("words", "65", "空格 加 a以输入这行数据，需要关闭中文输入法。65-81对应a-z", filePath);
@@ -92,8 +121,13 @@ namespace QuickInput
         }
 
 
-        public static void WriteHelp(string filePath)
+        public static void WriteHelp(string filePath = "")
         {
+            if (filePath.Equals(""))
+            {
+                filePath = iniPath;
+            }
+
             if (Read("words", "65", "", filePath).Equals(""))
             {
                 WritePrivateProfileString("words", "65", "", filePath);
@@ -119,8 +153,12 @@ namespace QuickInput
         /// <param name="section">节点名</param>
         /// <param name="filePath">INI文件完整路径</param>
         /// <returns>非零表示成功，零表示失败</returns>
-        public static int DeleteSection(string section, string filePath)
+        public static int DeleteSection(string section, string filePath = "")
         {
+            if (filePath.Equals(""))
+            {
+                filePath = iniPath;
+            }
             return Write(section, null, null, filePath);
         }
 
@@ -131,9 +169,107 @@ namespace QuickInput
         /// <param name="key">键名</param>
         /// <param name="filePath">INI文件完整路径</param>
         /// <returns>非零表示成功，零表示失败</returns>
-        public static int DeleteKey(string section, string key, string filePath)
+        public static int DeleteKey(string section, string key, string filePath = "")
         {
+            if (filePath.Equals(""))
+            {
+                filePath = iniPath;
+            }
             return Write(section, key, null, filePath);
+        }
+
+        /// <summary>
+        /// 读取Ini文件
+        /// </summary>
+        /// <param name="withoutNumber">是否不读取数字</param>
+        /// <returns>返回valuesdic字典</returns>
+        public static Dictionary<int, string> readIni(bool withoutNumber = false)
+        {
+            CheckPath(iniPath);
+
+            for (int i = 0; i < valuesNum; i++)
+            {
+                if (withoutNumber)
+                {
+                    if (i >= 48 && i <= 57) continue;
+                }
+                //values[i] = IniManager.Read("words", "" + i, "", iniPath);
+                valuesDic[i] = IniManager.Read("words", "" + i, "", iniPath);
+            }
+
+
+
+
+            return valuesDic;
+        }
+
+        /// <summary>
+        /// 本地化设置文件
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="onlyNumber"></param>
+        //public static void writeIni(string[] values, bool onlyNumber = false)
+        //{
+     
+        //    if (onlyNumber)
+        //    {
+        //        //只保存0-9
+        //        for (int i = 48; i < 57; i++)
+        //        {
+        //            if (!values[i].Equals(""))
+        //            {
+        //                IniManager.Write("words", i.ToString(), values[i], iniPath);
+        //            }
+        //        }
+        //    }
+
+        //    else
+        //    {
+        //        //保存全部
+        //        foreach (var iv in valuesDic)
+        //        {
+        //            int i = iv.Key;
+        //            if (!values[i].Equals(""))
+        //            {
+        //                IniManager.Write("words", i.ToString(), values[i], iniPath);
+        //            }
+        //        }
+
+        //            for (int i = 0; i < valuesNum; i++)
+        //        {
+
+        //        }
+        //    }
+
+        //}
+        public static void writeIni(Dictionary<int, string> valuesDic, bool onlyNumber = false)
+        {
+     
+            if (onlyNumber)
+            {
+                //只保存0-9
+                for (int i = 48; i < 57; i++)
+                {
+                    if (valuesDic.ContainsKey(i))
+                    {
+                        IniManager.Write("words", i.ToString(), valuesDic[i], iniPath);
+                    }
+                }
+            }
+
+            else
+            {
+                //保存全部
+                foreach (var iv in valuesDic)
+                {
+                    int i = iv.Key;
+                    if (valuesDic.ContainsKey(i))
+                    {
+                        IniManager.Write("words", i.ToString(), valuesDic[i], iniPath);
+                    }
+                }
+            }
+
         }
     }
 }

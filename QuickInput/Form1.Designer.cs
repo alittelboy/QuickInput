@@ -46,11 +46,14 @@
             this.另存为设置文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.启动不显示窗体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置右键发送到快捷键ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.高级设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开设置文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开设置文件目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.读取设置文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.启动不显示窗体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.设置开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.测试模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +64,7 @@
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.placeHolderTextBox2 = new RevitDevelopment.CustomControls.PlaceHolderTextBox();
             this.placeHolderTextBox1 = new RevitDevelopment.CustomControls.PlaceHolderTextBox();
             this.contextMenuStrip1.SuspendLayout();
@@ -131,6 +135,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.开始ToolStripMenuItem,
             this.设置ToolStripMenuItem1,
+            this.高级设置ToolStripMenuItem,
             this.关于ToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
@@ -155,7 +160,7 @@
             // 
             this.打开设置文件ToolStripMenuItem1.Name = "打开设置文件ToolStripMenuItem1";
             resources.ApplyResources(this.打开设置文件ToolStripMenuItem1, "打开设置文件ToolStripMenuItem1");
-            this.打开设置文件ToolStripMenuItem1.Click += new System.EventHandler(this.打开设置文件ToolStripMenuItem1_Click);
+            this.打开设置文件ToolStripMenuItem1.Click += new System.EventHandler(this.open打开设置文件ToolStripMenuItem1_Click);
             // 
             // 另存为设置文件ToolStripMenuItem
             // 
@@ -172,14 +177,48 @@
             // 设置ToolStripMenuItem1
             // 
             this.设置ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.设置ToolStripMenuItem2,
+            this.启动不显示窗体ToolStripMenuItem,
+            this.设置开机启动ToolStripMenuItem,
+            this.设置右键发送到快捷键ToolStripMenuItem});
+            this.设置ToolStripMenuItem1.Name = "设置ToolStripMenuItem1";
+            resources.ApplyResources(this.设置ToolStripMenuItem1, "设置ToolStripMenuItem1");
+            // 
+            // 设置ToolStripMenuItem2
+            // 
+            this.设置ToolStripMenuItem2.Name = "设置ToolStripMenuItem2";
+            resources.ApplyResources(this.设置ToolStripMenuItem2, "设置ToolStripMenuItem2");
+            this.设置ToolStripMenuItem2.Click += new System.EventHandler(this.设置ToolStripMenuItem2_Click);
+            // 
+            // 启动不显示窗体ToolStripMenuItem
+            // 
+            this.启动不显示窗体ToolStripMenuItem.Checked = true;
+            this.启动不显示窗体ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.启动不显示窗体ToolStripMenuItem.Name = "启动不显示窗体ToolStripMenuItem";
+            resources.ApplyResources(this.启动不显示窗体ToolStripMenuItem, "启动不显示窗体ToolStripMenuItem");
+            this.启动不显示窗体ToolStripMenuItem.Click += new System.EventHandler(this.启动不显示窗体ToolStripMenuItem_Click);
+            // 
+            // 设置开机启动ToolStripMenuItem
+            // 
+            this.设置开机启动ToolStripMenuItem.Name = "设置开机启动ToolStripMenuItem";
+            resources.ApplyResources(this.设置开机启动ToolStripMenuItem, "设置开机启动ToolStripMenuItem");
+            this.设置开机启动ToolStripMenuItem.Click += new System.EventHandler(this.设置开机启动ToolStripMenuItem_Click);
+            // 
+            // 设置右键发送到快捷键ToolStripMenuItem
+            // 
+            this.设置右键发送到快捷键ToolStripMenuItem.Name = "设置右键发送到快捷键ToolStripMenuItem";
+            resources.ApplyResources(this.设置右键发送到快捷键ToolStripMenuItem, "设置右键发送到快捷键ToolStripMenuItem");
+            this.设置右键发送到快捷键ToolStripMenuItem.Click += new System.EventHandler(this.设置右键发送到快捷键ToolStripMenuItem_Click);
+            // 
+            // 高级设置ToolStripMenuItem
+            // 
+            this.高级设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打开设置文件ToolStripMenuItem,
             this.打开设置文件目录ToolStripMenuItem,
             this.读取设置文件ToolStripMenuItem,
-            this.启动不显示窗体ToolStripMenuItem,
-            this.设置开机启动ToolStripMenuItem,
             this.测试模式ToolStripMenuItem});
-            this.设置ToolStripMenuItem1.Name = "设置ToolStripMenuItem1";
-            resources.ApplyResources(this.设置ToolStripMenuItem1, "设置ToolStripMenuItem1");
+            this.高级设置ToolStripMenuItem.Name = "高级设置ToolStripMenuItem";
+            resources.ApplyResources(this.高级设置ToolStripMenuItem, "高级设置ToolStripMenuItem");
             // 
             // 打开设置文件ToolStripMenuItem
             // 
@@ -197,21 +236,7 @@
             // 
             this.读取设置文件ToolStripMenuItem.Name = "读取设置文件ToolStripMenuItem";
             resources.ApplyResources(this.读取设置文件ToolStripMenuItem, "读取设置文件ToolStripMenuItem");
-            this.读取设置文件ToolStripMenuItem.Click += new System.EventHandler(this.读取设置文件ToolStripMenuItem_Click);
-            // 
-            // 启动不显示窗体ToolStripMenuItem
-            // 
-            this.启动不显示窗体ToolStripMenuItem.Checked = true;
-            this.启动不显示窗体ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.启动不显示窗体ToolStripMenuItem.Name = "启动不显示窗体ToolStripMenuItem";
-            resources.ApplyResources(this.启动不显示窗体ToolStripMenuItem, "启动不显示窗体ToolStripMenuItem");
-            this.启动不显示窗体ToolStripMenuItem.Click += new System.EventHandler(this.启动不显示窗体ToolStripMenuItem_Click);
-            // 
-            // 设置开机启动ToolStripMenuItem
-            // 
-            this.设置开机启动ToolStripMenuItem.Name = "设置开机启动ToolStripMenuItem";
-            resources.ApplyResources(this.设置开机启动ToolStripMenuItem, "设置开机启动ToolStripMenuItem");
-            this.设置开机启动ToolStripMenuItem.Click += new System.EventHandler(this.设置开机启动ToolStripMenuItem_Click);
+            this.读取设置文件ToolStripMenuItem.Click += new System.EventHandler(this.重新读取设置ToolStripMenuItem_Click);
             // 
             // 测试模式ToolStripMenuItem
             // 
@@ -279,6 +304,11 @@
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             // 
+            // textBox4
+            // 
+            resources.ApplyResources(this.textBox4, "textBox4");
+            this.textBox4.Name = "textBox4";
+            // 
             // placeHolderTextBox2
             // 
             resources.ApplyResources(this.placeHolderTextBox2, "placeHolderTextBox2");
@@ -299,6 +329,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.placeHolderTextBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBox3);
@@ -343,10 +374,7 @@
         private System.Windows.Forms.ToolStripMenuItem 托盘模式ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 启动不显示窗体ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 打开设置文件ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 读取设置文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设置开机启动ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 测试模式ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 按键码查询ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 转移查询ToolStripMenuItem;
@@ -354,10 +382,17 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripMenuItem 打开设置文件ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 另存为设置文件ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 打开设置文件目录ToolStripMenuItem;
         private RevitDevelopment.CustomControls.PlaceHolderTextBox placeHolderTextBox2;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 高级功能使用ToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.ToolStripMenuItem 设置右键发送到快捷键ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 高级设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开设置文件ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开设置文件目录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 测试模式ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 读取设置文件ToolStripMenuItem;
     }
 }
 

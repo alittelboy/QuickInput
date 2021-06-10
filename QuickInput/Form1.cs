@@ -6,20 +6,36 @@ using System.Diagnostics;
 using System.IO;
 using File = System.IO.File;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace QuickInput
 {
     public partial class Form1 : Form
     {
-        static string myPath = Application.ExecutablePath;
-        static string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        static string startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-        static string startupFullPath = startupPath + "\\QuickInput.lnk";
-        static string quickInputSet = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\quickInputSet";
-        private string iniPath = quickInputSet + "\\QuickInputSet.ini";
+        public static string myName = System.IO.Path.GetFileName(Application.ExecutablePath);
+        public static string myPath = Application.ExecutablePath;
+        public static string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static string startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+        public static string startupFullPath = startupPath + "\\QuickInput.lnk";
+        public static string quickInputSet = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\quickInputSet";
+        public static string sPath = Environment.GetEnvironmentVariable("AppData");
+        public static string sendtoPath = sPath + "\\Microsoft\\Windows\\SendTo\\";
 
-        public Form1()
+        public string iniPath = quickInputSet + "\\QuickInputSet.ini";
+        int setMode = 0;
+        public string[] args = null;
+        //string[] values = IniManager.values;
+        Dictionary<int, string> valuesDic = IniManager.valuesDic;
+
+        public Form1(string[] args = null)
         {
+            //参数表模式
+            if (args != null)
+            {
+                this.args = args;
+                setMode = 1;
+            }
+            
             InitializeComponent();
         }
 
@@ -30,7 +46,7 @@ namespace QuickInput
         bool[] keys = new Boolean[255];
         bool[] keys_before = new Boolean[255];
 
-        string[] values = new String[255];
+
         private string splitChar = "";
         private bool testMode = false;
         string initial_title = "";
@@ -42,7 +58,7 @@ namespace QuickInput
         void timer_Tick()
         {
 
-
+            //readWithoutNumber();
             GetPressedKey();
 
             if (testMode)
@@ -66,10 +82,9 @@ namespace QuickInput
                 {
                     if (keys[i] && !keys_before[i])
                     {
-                        if (!values[i].Equals(""))//为空不输出
+                        if (valuesDic.ContainsKey(i) && !valuesDic[i].Equals(""))//为空不输出
                         {
-                            SendKeys.SendWait("{BKSP}");
-                            SendKeys.SendWait("{BKSP}");
+
                             SendOutByI(i);
                             return;
                         }
@@ -99,7 +114,7 @@ namespace QuickInput
                 {
                     if (keys[i] && !keys_before[i])
                     {
-                        string tmp = values[i];
+                        string tmp = valuesDic[i];
                         SendKeys.SendWait("^c");
                         string tmp2 = Clipboard.GetText();
                         setValue(i, tmp + splitChar + tmp2);
@@ -116,7 +131,7 @@ namespace QuickInput
         private void SendOutByI(int i)
         {
             
-            string tmp = values[i];
+            string tmp = valuesDic[i];
 
             if (tmp.IndexOf("QuickInputRun:")==0)
             {
@@ -141,6 +156,8 @@ namespace QuickInput
             }
             else
             {
+                SendKeys.SendWait("{BKSP}");
+                SendKeys.SendWait("{BKSP}");
                 SendKeys.SendWait(tmp);
             }
             
@@ -158,6 +175,8 @@ namespace QuickInput
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+            IniManager.init(this);
             if (!File.Exists(quickInputSet))
             {
                 Directory.CreateDirectory(quickInputSet);
@@ -168,9 +187,18 @@ namespace QuickInput
                 File.Delete(startupFullPath);
                 setStartUp(0,false);
             }
+            // 在启动时有命令行时，执行设置模式，不启动窗体功能
+            //if (setMode == 1)
+            //{
+            //    MessageBox.Show("123");
+            //    // 关闭计时器等
+            //    // inputbox
+            //    // 设置快捷键
+            //    // 退出
+            //}
 
             //设置timer
-            timer1.Interval = 3;   //设置刷新的间隔时间
+            timer1.Interval = 30;   //设置刷新的间隔时间
             timer1.Enabled = true;
 
             this.textBox3.BackColor = System.Drawing.SystemColors.Control;
@@ -189,7 +217,7 @@ namespace QuickInput
             {
                 for (int i = 0; i < 255; i++)
                 {
-                    values[i] = "test";
+                    valuesDic[i] = "test";
                 }
             }
 
@@ -222,32 +250,28 @@ namespace QuickInput
         }
         private void save()
         {
-            for (int i = 48; i < 57; i++)
-            {
-                if (!values[i].Equals(""))
-                {
-                    IniManager.Write("words", i.ToString(), values[i], iniPath);
-                }
-            }
+            IniManager.writeIni(valuesDic, true);
         }
 
         private void read()
         {
 
-            for (int i = 0; i < 255; i++)
-            {
-                values[i] = IniManager.Read("words", "" + i, "", iniPath, true);
-            }
+            valuesDic = IniManager.readIni();
+        }
+
+        private void readWithoutNumber()
+        {
+            valuesDic = IniManager.readIni(false);
         }
 
         private void setValue(int index, String val, Boolean needsave = true)
         {
             Console.WriteLine("Set " + index + ": " + val);
             //做一些反转义的处理
-            values[index] = val.Replace("\r\n", "{ENTER}");
-            values[index] = val.Replace("\n\r", "{ENTER}");
-            values[index] = val.Replace("\n", "{ENTER}");
-            values[index] = val.Replace("\r", "{ENTER}");
+            valuesDic[index] = val.Replace("\r\n", "{ENTER}");
+            valuesDic[index] = val.Replace("\n\r", "{ENTER}");
+            valuesDic[index] = val.Replace("\n", "{ENTER}");
+            valuesDic[index] = val.Replace("\r", "{ENTER}");
             if (needsave)
             {
                 save();
@@ -376,7 +400,7 @@ namespace QuickInput
 
         private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openSetIni();
+            openSetting(false);
         }
 
         private void 官网ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -583,7 +607,7 @@ namespace QuickInput
 
         }
 
-        private void 打开设置文件ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void open打开设置文件ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //选择文件
             OpenFileDialog dialog = new OpenFileDialog();
@@ -691,6 +715,48 @@ namespace QuickInput
         {
             string tmp = "特殊字符\n功能键和一些特殊字符需要输入转义版本，例如{ENTER}表示换行。更多转义你可以点击关于->转义查询。\n\n打开文件\n将编队设置为文件地址，调用编队即可打开文件。例如：65=D:\\myfile.txt\n\n打开文件夹\n将编队设置为文件夹地址，调用编队即可打开文件夹。例如：65=D:\\\n\n打开网页\n将编队设置为完整的网页地址（http或https），调用编队即可打开网页。例如：65=https://www.baidu.com/\n\n运行指令\n将编队设置为开头“QuickInputRun:”，调用编队即可执行指令。例如：65=QuickInputRun:cmd";
             MessageBox.Show(tmp, "高级功能使用");
+        }
+
+        private void 设置右键发送到快捷键ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 复制到sendto
+
+
+            if (!File.Exists(sendtoPath + myName))
+            {
+                File.Copy(myPath, sendtoPath + myName);
+                MessageBox.Show("设置成功，你可以在选择文件（夹），右键，发送到，选本软件，设置快捷键。用快捷键即可打开文件");
+            }
+            else
+            {
+                MessageBox.Show("文件已经存在，将会替换");
+                File.Delete(sendtoPath + myName);
+                File.Copy(myPath, sendtoPath + myName);
+            }
+        }
+
+
+        private void 重新读取设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            read();
+        }
+
+        private void timer2_Tick_1(object sender, EventArgs e)
+        {
+            readWithoutNumber();
+        }
+
+        private void 设置ToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            openSetting();
+
+        }
+
+        void openSetting(bool needReshow = true)
+        {
+            Setting setting = new Setting(needReshow);
+            this.Hide();
+            setting.Show();
         }
     }
 
