@@ -10,29 +10,30 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-[Xx]64/
-[Xx]86/
-[Bb]uild/
-bld/
-[Bb]in/
-[Oo]bj/
+QuickInput/[Dd]ebug/
+QuickInput/[Dd]ebugPublic/
+QuickInput/[Rr]elease/
+QuickInput/[Rr]eleases/
+QuickInput/[Xx]64/
+QuickInput/[Xx]86/
+QuickInput/[Bb]uild/
+QuickInput/bld/
+QuickInput/[Bb]in/
+QuickInput/[Oo]bj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
 # MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
+QuickInput/[Tt]est[Rr]esult*/
+QuickInput/[Bb]uild[Ll]og.*
 
 # NUNIT
 *.VisualState.xml
-TestResult.xml
+QuickInput/TestResult.xml
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
@@ -72,7 +73,7 @@ artifacts/
 _Chutzpah*
 
 # Visual C++ cache files
-ipch/
+QuickInput/ipch/
 *.aps
 *.ncb
 *.opendb
