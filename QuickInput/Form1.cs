@@ -20,12 +20,13 @@ namespace QuickInput
         public static string quickInputSet = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\quickInputSet";
         public static string sPath = Environment.GetEnvironmentVariable("AppData");
         public static string sendtoPath = sPath + "\\Microsoft\\Windows\\SendTo\\";
-
+       
         public string iniPath = quickInputSet + "\\QuickInputSet.ini";
         int setMode = 0;
         public string[] args = null;
         //string[] values = IniManager.values;
         Dictionary<int, string> valuesDic = IniManager.valuesDic;
+        private Setting settingWindow = null;
 
         public Form1(string[] args = null)
         {
@@ -61,15 +62,24 @@ namespace QuickInput
             //readWithoutNumber();
             GetPressedKey();
 
-            if (testMode)
+
+            if (按键码实时显示ToolStripMenuItem.Checked)
             {
-                Text = string.Concat("TimerWindow  ", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
-                //输出看看
+                bool haveSetting = settingWindow != null;
+                Text = initial_title + "    实时按键码：";
+                if (haveSetting)
+                {
+                    settingWindow.Text = "Setting    实时按键码：";
+                }
                 for (int i = 0; i < 255; i++)
                 {
                     if (keys[i])
                     {
                         this.Text += " " + i;
+                        if (haveSetting)
+                        {
+                            settingWindow.Text += " " + i;
+                        }
                     }
                 }
             }
@@ -176,17 +186,35 @@ namespace QuickInput
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            IniManager.init(this);
+            //创建初始配置文件的文件夹
             if (!File.Exists(quickInputSet))
             {
                 Directory.CreateDirectory(quickInputSet);
             }
+            // 有参启动也要配置，在program.cs里
+
+            //判断重定向，即是否修改了默认的配置文件路径
+            string redirect = IniManager.Read("initialization", "redirect", "" , iniPath);
+            //如果重定向不为空
+            if (!redirect.Equals(""))
+            {
+                if (File.Exists(redirect))
+                {
+                    //MessageBox.Show("redirect!" + redirect);
+                    iniPath = redirect;
+                }
+            }
+
+            // 静态类和窗体绑定，以后就不用输入iniPath、form1了
+            IniManager.init(this);
+
             // 用于解决文件移动以后，快捷方式可能的问题
             if (File.Exists(startupFullPath))
             {
                 File.Delete(startupFullPath);
                 setStartUp(0,false);
             }
+
             // 在启动时有命令行时，执行设置模式，不启动窗体功能
             //if (setMode == 1)
             //{
@@ -196,6 +224,10 @@ namespace QuickInput
             //    // 设置快捷键
             //    // 退出
             //}
+
+            
+
+
 
             //设置timer
             timer1.Interval = 30;   //设置刷新的间隔时间
@@ -211,7 +243,7 @@ namespace QuickInput
             this.textBox2.Text = iniPath;
 
             initial_title = this.Text;
-            Size = new System.Drawing.Size(480, 180);
+            Size = new System.Drawing.Size(480, 170);
 
             if (testMode)
             {
@@ -221,6 +253,7 @@ namespace QuickInput
                 }
             }
 
+            // 读取配置文件需要在初始化设置以后，例如计时器初始化
             read();
 
             设置开机启动ToolStripMenuItem.Checked = System.IO.File.Exists(startupFullPath);
@@ -255,8 +288,34 @@ namespace QuickInput
 
         private void read()
         {
-
+            //读取key value 信息
             valuesDic = IniManager.readIni();
+
+            // 读取默认快捷键
+            string hotKeyStr = IniManager.Read("initialization", "hotKey", "");
+            placeHolderTextBox1.Text = hotKeyStr;
+            try
+            {
+                hotKeyOut = int.Parse(placeHolderTextBox1.Text);
+            }
+            catch (Exception)
+            {
+
+                ;
+            }
+
+            // 读取默认时间间隔
+            string timerInterval = IniManager.Read("initialization", "timerInterval", "");
+            placeHolderTextBox1.Text = timerInterval;
+            try
+            {
+                timer1.Interval = int.Parse(placeHolderTextBox1.Text);
+            }
+            catch (Exception)
+            {
+
+                ;
+            }
         }
 
         private void readWithoutNumber()
@@ -486,6 +545,7 @@ namespace QuickInput
             try
             {
                 timer1.Interval = int.Parse(placeHolderTextBox1.Text);
+                IniManager.Write("initialization", "timerInterval", timer1.Interval+"");
             }
             catch (Exception)
             {
@@ -606,6 +666,11 @@ namespace QuickInput
         {
 
         }
+        private void setRedirect(string redirect)
+        {
+            IniManager.Write("initialization", "redirect", redirect);
+        }
+
 
         private void open打开设置文件ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -620,6 +685,7 @@ namespace QuickInput
                 iniPath = dialog.FileName;
             }
             textBox2.Text = iniPath;
+            setRedirect(iniPath);
         }
         /// <summary>
         /// 浏览文件
@@ -666,6 +732,7 @@ namespace QuickInput
                 File.Copy(iniPath, sfd.FileName);
                 iniPath = sfd.FileName;
                 textBox2.Text = iniPath;
+                setRedirect(iniPath);
             }
         }
 
@@ -674,6 +741,7 @@ namespace QuickInput
             try
             {
                 hotKeyOut = int.Parse(placeHolderTextBox1.Text);
+                IniManager.Read("initialization", "hotKey", "" + hotKeyOut);
             }
             catch (Exception)
             {
@@ -755,8 +823,19 @@ namespace QuickInput
         void openSetting(bool needReshow = true)
         {
             Setting setting = new Setting(needReshow);
+            this.settingWindow = setting;
             this.Hide();
             setting.Show();
+        }
+
+        private void 按键码实时显示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            按键码实时显示ToolStripMenuItem.Checked = ! 按键码实时显示ToolStripMenuItem.Checked;
+
+            if (按键码实时显示ToolStripMenuItem.Checked == false) 
+            {
+                Text = initial_title;
+            }
         }
     }
 

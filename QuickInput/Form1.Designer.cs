@@ -67,6 +67,9 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.placeHolderTextBox2 = new RevitDevelopment.CustomControls.PlaceHolderTextBox();
             this.placeHolderTextBox1 = new RevitDevelopment.CustomControls.PlaceHolderTextBox();
+            this.按键码实时显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -180,7 +183,8 @@
             this.设置ToolStripMenuItem2,
             this.启动不显示窗体ToolStripMenuItem,
             this.设置开机启动ToolStripMenuItem,
-            this.设置右键发送到快捷键ToolStripMenuItem});
+            this.设置右键发送到快捷键ToolStripMenuItem,
+            this.按键码实时显示ToolStripMenuItem});
             this.设置ToolStripMenuItem1.Name = "设置ToolStripMenuItem1";
             resources.ApplyResources(this.设置ToolStripMenuItem1, "设置ToolStripMenuItem1");
             // 
@@ -325,10 +329,30 @@
             this.placeHolderTextBox1.PlaceHolderText = "检测时间间隔（ms）";
             this.placeHolderTextBox1.TextChanged += new System.EventHandler(this.placeHolderTextBox1_TextChanged);
             // 
+            // 按键码实时显示ToolStripMenuItem
+            // 
+            this.按键码实时显示ToolStripMenuItem.Checked = true;
+            this.按键码实时显示ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.按键码实时显示ToolStripMenuItem.Name = "按键码实时显示ToolStripMenuItem";
+            resources.ApplyResources(this.按键码实时显示ToolStripMenuItem, "按键码实时显示ToolStripMenuItem");
+            this.按键码实时显示ToolStripMenuItem.Click += new System.EventHandler(this.按键码实时显示ToolStripMenuItem_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.placeHolderTextBox2);
             this.Controls.Add(this.textBox1);
@@ -393,6 +417,9 @@
         private System.Windows.Forms.ToolStripMenuItem 打开设置文件目录ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 测试模式ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 读取设置文件ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 按键码实时显示ToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }
 

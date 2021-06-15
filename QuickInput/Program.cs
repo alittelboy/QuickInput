@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -40,6 +41,17 @@ namespace QuickInput
                     code = tmpcode + "";
                 }
                 string iniPath = Form1.quickInputSet + "\\QuickInputSet.ini";// 
+                //判断重定向，即是否修改了默认的配置文件路径
+                string redirect = IniManager.Read("initialization", "redirect", "", iniPath);
+                //如果重定向不为空
+                if (!redirect.Equals(""))
+                {
+                    if (File.Exists(redirect))
+                    {
+                        //MessageBox.Show("redirect!" + redirect);
+                        iniPath = redirect;
+                    }
+                }
                 IniManager.Write("words", code, args[0], iniPath);
                 MessageBox.Show("设置成功，即将重启本软件");
 

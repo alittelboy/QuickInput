@@ -196,7 +196,7 @@ namespace QuickInput
                 //values[i] = IniManager.Read("words", "" + i, "", iniPath);
                 valuesDic[i] = IniManager.Read("words", "" + i, "", iniPath);
             }
-
+            
 
 
 
