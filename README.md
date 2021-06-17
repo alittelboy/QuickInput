@@ -20,6 +20,9 @@ https://github.com/alittelboy/QuickInput/releases/download/1.6/QuickInput.exe
 
 
 # 使用方法：
+
+使用前，先切换为英文输入法
+
 ## 快捷输入
 空格 + 字母/数字/其他键盘按键：根据设置自动发送对应**编队**存储的按键。
 
