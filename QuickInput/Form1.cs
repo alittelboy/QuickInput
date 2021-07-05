@@ -917,7 +917,7 @@ namespace QuickInput
 
         void openSetting(bool needReshow = true)
         {
-            if (setting == null)
+            if (setting == null || setting.IsDisposed==true || setting.Disposing==true)
             {
                 setting = new Setting(needReshow);
             }
