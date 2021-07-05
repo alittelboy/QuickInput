@@ -7,6 +7,7 @@ using System.IO;
 using File = System.IO.File;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using Input;
 
 namespace QuickInput
 {
@@ -26,6 +27,8 @@ namespace QuickInput
         public string[] args = null;
         //string[] values = IniManager.values;
         Dictionary<int, string> valuesDic = IniManager.valuesDic;
+        Dictionary<string, string> specialDic = IniManager.specialDic;
+        
         private Setting settingWindow = null;
 
         public Form1(string[] args = null)
@@ -54,11 +57,10 @@ namespace QuickInput
         int hotKeyOut = 32;//空格
 
         int[] press_test = new int[255];
-
+        Setting setting;
 
         void timer_Tick()
         {
-
             //readWithoutNumber();
             GetPressedKey();
 
@@ -66,10 +68,10 @@ namespace QuickInput
             if (按键码实时显示ToolStripMenuItem.Checked)
             {
                 bool haveSetting = settingWindow != null;
-                Text = initial_title + "    实时按键码：";
+                Text = initial_title + " 实时按键码：";
                 if (haveSetting)
                 {
-                    settingWindow.Text = "Setting    实时按键码：";
+                    settingWindow.Text = "Setting 实时按键码：";
                 }
                 for (int i = 0; i < 255; i++)
                 {
@@ -82,6 +84,70 @@ namespace QuickInput
                         }
                     }
                 }
+                this.Text += "字典：" + IniManager.wordName;
+                if (haveSetting)
+                {
+                    settingWindow.Text += "字典：" + IniManager.wordName;
+                }
+            }
+
+
+            //窗体事件 与 自定义按键
+            //自定义按键格式：
+            //按键码,按键码,按键码...=指令
+            foreach (var keys_command in specialDic)
+            {
+
+                string[] key_list = keys_command.Key.Split(',');
+                List<int> keyInt = new List<int>();
+
+
+                for (int i = 0; i < key_list.Length; i++)
+                {
+                    try
+                    {
+                        string tmp = key_list[i];
+                        keyInt.Add(int.Parse(tmp));
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+
+                if (keyInt.Count<=0)
+                {
+                    continue;
+                }
+                bool flag = true;
+                //必须每个键都被按下
+                foreach (var item in keyInt)
+                {
+                    if (!keys[item])
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (!flag)
+                {
+                    continue;
+                }
+                //上一时刻，至少一个按键不被按下
+                flag = false;
+                foreach (var item in keyInt)
+                {
+                    if (!keys_before[item])
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag)
+                {
+                    SendOutByI(0,0,keys_command.Value);
+                    return;
+                }
+                ;
             }
 
 
@@ -138,10 +204,50 @@ namespace QuickInput
 
         }
 
-        private void SendOutByI(int i)
+        private void SendOutByI(int i,int backsapce = 2, string command = "")
         {
-            
-            string tmp = valuesDic[i];
+            string tmp;
+            if (command.Equals(""))
+            {
+                tmp = valuesDic[i];
+            }
+            else
+            {
+                tmp = command;
+            }
+
+            if (tmp.IndexOf("QuickInput:") == 0)
+            {
+                string com = tmp.Substring("QuickInput:".Length);
+                //最大化
+                if (com.Equals("show"))
+                {
+                    this.Show();
+                }
+                //最小化
+                if (com.Equals("hide"))
+                {
+                    this.Hide();
+                }
+                //设置
+                if (com.Equals("set"))
+                {
+                    this.openSetting();
+                }
+                //切换words
+                if (com.Equals("changeWords"))
+                {
+                    this.changeWords();
+                }
+                //重新读取配置文件
+                if (com.Equals("read"))
+                {
+                    IniManager.readIni();
+                    MessageBox.Show("读取成功！");
+                }
+                
+                return;
+            }
 
             if (tmp.IndexOf("QuickInputRun:")==0)
             {
@@ -166,8 +272,12 @@ namespace QuickInput
             }
             else
             {
-                SendKeys.SendWait("{BKSP}");
-                SendKeys.SendWait("{BKSP}");
+                
+                for (int j = 0; j < backsapce; j++)
+                {
+                    SendKeys.SendWait("{BKSP}");
+                }
+
                 SendKeys.SendWait(tmp);
             }
             
@@ -290,6 +400,7 @@ namespace QuickInput
         {
             //读取key value 信息
             valuesDic = IniManager.readIni();
+            specialDic = IniManager.readSpecialIni();
 
             // 读取默认快捷键
             string hotKeyStr = IniManager.Read("initialization", "hotKey", "");
@@ -327,10 +438,11 @@ namespace QuickInput
         {
             Console.WriteLine("Set " + index + ": " + val);
             //做一些反转义的处理
-            valuesDic[index] = val.Replace("\r\n", "{ENTER}");
-            valuesDic[index] = val.Replace("\n\r", "{ENTER}");
-            valuesDic[index] = val.Replace("\n", "{ENTER}");
-            valuesDic[index] = val.Replace("\r", "{ENTER}");
+            val = val.Replace("\r\n", "{ENTER}");
+            val = val.Replace("\n\r", "{ENTER}");
+            val = val.Replace("\n", "{ENTER}");
+            val = val.Replace("\r", "{ENTER}");
+            valuesDic[index] = val;
             if (needsave)
             {
                 save();
@@ -338,11 +450,6 @@ namespace QuickInput
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //IniManager.WriteHelp(iniPath);
-            read();
-        }
 
         private void openSetIni()
         {
@@ -501,25 +608,6 @@ namespace QuickInput
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-
-
-        private void setOpenShow(int code = 0)
-        {
-            switch (code)
-            {
-                case 0:
-                    //设置托盘启动
-                    IniManager.Write("initialization", "openshow", "no", iniPath);
-                    break;
-                case 1:
-                    //设置正常启动
-                    IniManager.Write("initialization", "openshow", "", iniPath);
-                    break;
-                default:
-                    break;
-            }
         }
 
 
@@ -752,6 +840,7 @@ namespace QuickInput
 
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             MessageBox.Show("developing!","sorry");
         }
 
@@ -760,6 +849,12 @@ namespace QuickInput
             WshShell shell = new WshShell();
             shell.Run("cmd");
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //IniManager.WriteHelp(iniPath);
+            read();
+        }
+
 
         /// <summary>
         /// 判断一个字符串是否为url
@@ -822,7 +917,11 @@ namespace QuickInput
 
         void openSetting(bool needReshow = true)
         {
-            Setting setting = new Setting(needReshow);
+            if (setting == null)
+            {
+                setting = new Setting(needReshow);
+            }
+            
             this.settingWindow = setting;
             this.Hide();
             setting.Show();
@@ -837,6 +936,60 @@ namespace QuickInput
                 Text = initial_title;
             }
         }
+
+        private void 切换字典ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            MessageBox.Show("切换字典后，原字典内容不会删除但会无效，你可以切换回默认字典words" , "你当前的字典" + IniManager.wordName);
+            string newWords = InputBox.ShowInputBox("请输入新字典名：","建议简单一些");
+            
+            IniManager.wordName = newWords;
+            string copy = InputBox.ShowInputBox("是否把旧字典复制到新字典？y/n", "注意：y可能或摧毁字典" + newWords);
+
+            this.Show();
+            if (copy.Equals("y"))
+            {
+                IniManager.writeIni();
+            }
+            else
+            {
+                IniManager.readIni();
+            }
+        }
+
+
+        // 上面是窗体事件
+        // 下面是服务函数
+
+        void changeWords()
+        {
+            string newWords = "";
+            newWords = InputBox.ShowInputBox("切换words" , "当前字典：" + IniManager.wordName);
+            IniManager.wordName = newWords;
+            IniManager.readIni();
+        }
+
+
+        private void setOpenShow(int code = 0)
+        {
+            switch (code)
+            {
+                case 0:
+                    //设置托盘启动
+                    IniManager.Write("initialization", "openshow", "no", iniPath);
+                    break;
+                case 1:
+                    //设置正常启动
+                    IniManager.Write("initialization", "openshow", "", iniPath);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
     }
 
 }

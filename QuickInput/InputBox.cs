@@ -140,7 +140,7 @@ namespace Input
 
             this.ResumeLayout(false);
 
-
+            this.TopMost = true;
 
         }
 

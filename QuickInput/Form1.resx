@@ -183,6 +183,30 @@
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>273, 18</value>
   </metadata>
+  <data name="打开ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 24</value>
+  </data>
+  <data name="打开ToolStripMenuItem.Text" xml:space="preserve">
+    <value>还原窗口</value>
+  </data>
+  <data name="设置ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 24</value>
+  </data>
+  <data name="设置ToolStripMenuItem.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="官网ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 24</value>
+  </data>
+  <data name="官网ToolStripMenuItem.Text" xml:space="preserve">
+    <value>官网</value>
+  </data>
+  <data name="退出ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 24</value>
+  </data>
+  <data name="退出ToolStripMenuItem.Text" xml:space="preserve">
+    <value>退出</value>
+  </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 100</value>
   </data>
@@ -1330,92 +1354,38 @@
   <data name="notifyIcon1.Visible" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="打开ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 24</value>
-  </data>
-  <data name="打开ToolStripMenuItem.Text" xml:space="preserve">
-    <value>还原窗口</value>
-  </data>
-  <data name="设置ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 24</value>
-  </data>
-  <data name="设置ToolStripMenuItem.Text" xml:space="preserve">
-    <value>设置</value>
-  </data>
-  <data name="官网ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 24</value>
-  </data>
-  <data name="官网ToolStripMenuItem.Text" xml:space="preserve">
-    <value>官网</value>
-  </data>
-  <data name="退出ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 24</value>
-  </data>
-  <data name="退出ToolStripMenuItem.Text" xml:space="preserve">
-    <value>退出</value>
-  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>460, 17</value>
   </metadata>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="托盘模式ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
   </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 28</value>
+  <data name="托盘模式ToolStripMenuItem.Text" xml:space="preserve">
+    <value>托盘模式</value>
   </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="打开设置文件ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
   </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
+  <data name="打开设置文件ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>导入新设置文件</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
+  <data name="另存为设置文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="另存为设置文件ToolStripMenuItem.Text" xml:space="preserve">
+    <value>另存为设置文件</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="退出ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="退出ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>退出程序</value>
   </data>
   <data name="开始ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 24</value>
   </data>
   <data name="开始ToolStripMenuItem.Text" xml:space="preserve">
     <value>开始</value>
-  </data>
-  <data name="托盘模式ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
-  </data>
-  <data name="托盘模式ToolStripMenuItem.Text" xml:space="preserve">
-    <value>托盘模式</value>
-  </data>
-  <data name="打开设置文件ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
-  </data>
-  <data name="打开设置文件ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>导入新设置文件</value>
-  </data>
-  <data name="另存为设置文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
-  </data>
-  <data name="另存为设置文件ToolStripMenuItem.Text" xml:space="preserve">
-    <value>另存为设置文件</value>
-  </data>
-  <data name="退出ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
-  </data>
-  <data name="退出ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>退出程序</value>
-  </data>
-  <data name="设置ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 24</value>
-  </data>
-  <data name="设置ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>设置</value>
   </data>
   <data name="设置ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 26</value>
@@ -1441,35 +1411,89 @@
   <data name="设置右键发送到快捷键ToolStripMenuItem.Text" xml:space="preserve">
     <value>设置右键发送到快捷键</value>
   </data>
+  <data name="按键码实时显示ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 26</value>
+  </data>
+  <data name="按键码实时显示ToolStripMenuItem.Text" xml:space="preserve">
+    <value>按键码实时显示</value>
+  </data>
+  <data name="设置ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 24</value>
+  </data>
+  <data name="设置ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="打开设置文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
+  </data>
+  <data name="打开设置文件ToolStripMenuItem.Text" xml:space="preserve">
+    <value>打开设置文件</value>
+  </data>
+  <data name="打开设置文件目录ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
+  </data>
+  <data name="打开设置文件目录ToolStripMenuItem.Text" xml:space="preserve">
+    <value>打开设置文件夹</value>
+  </data>
+  <data name="读取设置文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
+  </data>
+  <data name="读取设置文件ToolStripMenuItem.Text" xml:space="preserve">
+    <value>重新读取设置文件</value>
+  </data>
+  <data name="切换字典ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
+  </data>
+  <data name="切换字典ToolStripMenuItem.Text" xml:space="preserve">
+    <value>切换字典</value>
+  </data>
+  <data name="测试模式ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
+  </data>
+  <data name="测试模式ToolStripMenuItem.Text" xml:space="preserve">
+    <value>测试模式</value>
+  </data>
   <data name="高级设置ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 24</value>
   </data>
   <data name="高级设置ToolStripMenuItem.Text" xml:space="preserve">
     <value>高级设置</value>
   </data>
-  <data name="打开设置文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+  <data name="帮助ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 26</value>
   </data>
-  <data name="打开设置文件ToolStripMenuItem.Text" xml:space="preserve">
-    <value>打开设置文件</value>
+  <data name="帮助ToolStripMenuItem.Text" xml:space="preserve">
+    <value>帮助</value>
   </data>
-  <data name="打开设置文件目录ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+  <data name="高级功能使用ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 26</value>
   </data>
-  <data name="打开设置文件目录ToolStripMenuItem.Text" xml:space="preserve">
-    <value>打开设置文件夹</value>
+  <data name="高级功能使用ToolStripMenuItem.Text" xml:space="preserve">
+    <value>高级功能使用</value>
   </data>
-  <data name="读取设置文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+  <data name="网站ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 26</value>
   </data>
-  <data name="读取设置文件ToolStripMenuItem.Text" xml:space="preserve">
-    <value>重新读取设置文件</value>
+  <data name="网站ToolStripMenuItem.Text" xml:space="preserve">
+    <value>官方网站</value>
   </data>
-  <data name="测试模式ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+  <data name="按键码查询ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 26</value>
   </data>
-  <data name="测试模式ToolStripMenuItem.Text" xml:space="preserve">
-    <value>测试模式</value>
+  <data name="按键码查询ToolStripMenuItem.Text" xml:space="preserve">
+    <value>按键码查询网页</value>
+  </data>
+  <data name="转移查询ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 26</value>
+  </data>
+  <data name="转移查询ToolStripMenuItem.Text" xml:space="preserve">
+    <value>转义查询网页</value>
+  </data>
+  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 26</value>
+  </data>
+  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
+    <value>English/中文</value>
   </data>
   <data name="关于ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 24</value>
@@ -1477,41 +1501,29 @@
   <data name="关于ToolStripMenuItem.Text" xml:space="preserve">
     <value>关于</value>
   </data>
-  <data name="帮助ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 26</value>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="帮助ToolStripMenuItem.Text" xml:space="preserve">
-    <value>帮助</value>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 28</value>
   </data>
-  <data name="高级功能使用ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 26</value>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="高级功能使用ToolStripMenuItem.Text" xml:space="preserve">
-    <value>高级功能使用</value>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
   </data>
-  <data name="网站ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 26</value>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
   </data>
-  <data name="网站ToolStripMenuItem.Text" xml:space="preserve">
-    <value>官方网站</value>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="按键码查询ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="按键码查询ToolStripMenuItem.Text" xml:space="preserve">
-    <value>按键码查询网页</value>
-  </data>
-  <data name="转移查询ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="转移查询ToolStripMenuItem.Text" xml:space="preserve">
-    <value>转义查询网页</value>
-  </data>
-  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 26</value>
-  </data>
-  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
-    <value>English/中文</value>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 105</value>
@@ -1652,12 +1664,6 @@ msgbox "234"</value>
   <data name="&gt;&gt;placeHolderTextBox1.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="按键码实时显示ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 26</value>
-  </data>
-  <data name="按键码实时显示ToolStripMenuItem.Text" xml:space="preserve">
-    <value>按键码实时显示</value>
-  </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1683,7 +1689,7 @@ msgbox "234"</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1710,7 +1716,7 @@ msgbox "234"</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2955,6 +2961,12 @@ msgbox "234"</value>
   <data name="&gt;&gt;设置右键发送到快捷键ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;按键码实时显示ToolStripMenuItem.Name" xml:space="preserve">
+    <value>按键码实时显示ToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;按键码实时显示ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;高级设置ToolStripMenuItem.Name" xml:space="preserve">
     <value>高级设置ToolStripMenuItem</value>
   </data>
@@ -3027,10 +3039,10 @@ msgbox "234"</value>
   <data name="&gt;&gt;englishToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;按键码实时显示ToolStripMenuItem.Name" xml:space="preserve">
-    <value>按键码实时显示ToolStripMenuItem</value>
+  <data name="&gt;&gt;切换字典ToolStripMenuItem.Name" xml:space="preserve">
+    <value>切换字典ToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;按键码实时显示ToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;切换字典ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -50,6 +50,7 @@
             this.启动不显示窗体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置右键发送到快捷键ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.按键码实时显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.高级设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开设置文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开设置文件目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,9 +68,9 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.placeHolderTextBox2 = new RevitDevelopment.CustomControls.PlaceHolderTextBox();
             this.placeHolderTextBox1 = new RevitDevelopment.CustomControls.PlaceHolderTextBox();
-            this.按键码实时显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.切换字典ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -214,12 +215,21 @@
             resources.ApplyResources(this.设置右键发送到快捷键ToolStripMenuItem, "设置右键发送到快捷键ToolStripMenuItem");
             this.设置右键发送到快捷键ToolStripMenuItem.Click += new System.EventHandler(this.设置右键发送到快捷键ToolStripMenuItem_Click);
             // 
+            // 按键码实时显示ToolStripMenuItem
+            // 
+            this.按键码实时显示ToolStripMenuItem.Checked = true;
+            this.按键码实时显示ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.按键码实时显示ToolStripMenuItem.Name = "按键码实时显示ToolStripMenuItem";
+            resources.ApplyResources(this.按键码实时显示ToolStripMenuItem, "按键码实时显示ToolStripMenuItem");
+            this.按键码实时显示ToolStripMenuItem.Click += new System.EventHandler(this.按键码实时显示ToolStripMenuItem_Click);
+            // 
             // 高级设置ToolStripMenuItem
             // 
             this.高级设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打开设置文件ToolStripMenuItem,
             this.打开设置文件目录ToolStripMenuItem,
             this.读取设置文件ToolStripMenuItem,
+            this.切换字典ToolStripMenuItem,
             this.测试模式ToolStripMenuItem});
             this.高级设置ToolStripMenuItem.Name = "高级设置ToolStripMenuItem";
             resources.ApplyResources(this.高级设置ToolStripMenuItem, "高级设置ToolStripMenuItem");
@@ -329,14 +339,6 @@
             this.placeHolderTextBox1.PlaceHolderText = "检测时间间隔（ms）";
             this.placeHolderTextBox1.TextChanged += new System.EventHandler(this.placeHolderTextBox1_TextChanged);
             // 
-            // 按键码实时显示ToolStripMenuItem
-            // 
-            this.按键码实时显示ToolStripMenuItem.Checked = true;
-            this.按键码实时显示ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.按键码实时显示ToolStripMenuItem.Name = "按键码实时显示ToolStripMenuItem";
-            resources.ApplyResources(this.按键码实时显示ToolStripMenuItem, "按键码实时显示ToolStripMenuItem");
-            this.按键码实时显示ToolStripMenuItem.Click += new System.EventHandler(this.按键码实时显示ToolStripMenuItem_Click);
-            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
@@ -346,6 +348,12 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            // 
+            // 切换字典ToolStripMenuItem
+            // 
+            this.切换字典ToolStripMenuItem.Name = "切换字典ToolStripMenuItem";
+            resources.ApplyResources(this.切换字典ToolStripMenuItem, "切换字典ToolStripMenuItem");
+            this.切换字典ToolStripMenuItem.Click += new System.EventHandler(this.切换字典ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -420,6 +428,7 @@
         private System.Windows.Forms.ToolStripMenuItem 按键码实时显示ToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem 切换字典ToolStripMenuItem;
     }
 }
 
